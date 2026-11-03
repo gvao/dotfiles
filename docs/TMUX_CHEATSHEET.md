@@ -48,11 +48,10 @@ Com o plugin ativo, você transita de forma fluida entre splits do Neovim e pain
 
 | Atalho Direto *(sem prefixo)* | Ação |
 | :--- | :--- |
-| `Ctrl + h` | Foca o painel ou split da **esquerda**. |
-| `Ctrl + j` | Foca o painel ou split de **baixo**. |
-| `Ctrl + k` | Foca o painel ou split de **cima**. |
-| `Ctrl + l` | Foca o painel ou split da **direita**. |
-| `Ctrl + \` | Alterna para o **painel anterior**. |
+| `Ctrl + Shift + h` | Foca o painel ou split da **esquerda**. |
+| `Ctrl + Shift + j` | Foca o painel ou split de **baixo**. |
+| `Ctrl + Shift + k` | Foca o painel ou split de **cima**. |
+| `Ctrl + Shift + l` | Foca o painel ou split da **direita**. |
 
 ### Redimensionamento de Painéis (Estilo Vi)
 

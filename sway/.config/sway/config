@@ -1,0 +1,169 @@
+# ==============================================================================
+# Configuração do Sway (Otimizada para Wayland)
+# ==============================================================================
+
+set $mod Mod4
+set $term alacritty
+
+# Captura de tela com seleção e cópia para o clipboard
+bindsym Ctrl+Shift+s exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copiado para a área de transferência!"
+
+focus_follows_mouse no
+
+# Daemons e Serviços do Sistema
+exec --no-startup-id mate-settings-daemon
+exec --no-startup-id nm-applet --indicator
+exec --no-startup-id blueman-applet
+exec --no-startup-id mate-power-manager
+exec --no-startup-id mate-polkit
+exec mako
+
+font pango:monospace 7
+
+# Bloqueio de tela e inatividade (Swayidle + Swaylock)
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    before-sleep 'swaylock -f -c 000000'
+
+# Controle de volume (PulseAudio / PipeWire)
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Modificador para janelas flutuantes com o mouse (Alt)
+floating_modifier Mod1 normal
+tiling_drag enable
+
+# Terminal e Navegador
+bindsym $mod+Return exec $term
+bindsym $mod+e exec firefox
+
+# Fechar janela focada
+bindsym $mod+q kill
+
+# Launchers de programas (Wofi Wayland)
+bindsym $mod+d exec wofi --show run
+bindsym $mod+i exec wofi --show drun
+
+# Navegação de foco
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Mover janelas com as setas
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Mover janelas (estilo vim)
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+semicolon split toggle
+
+# Tela cheia
+bindsym $mod+f fullscreen toggle
+
+# Alternar layout
+bindsym $mod+Shift+question layout toggle all
+
+# Janela flutuante / ladrilhada (tiling)
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Foco no contêiner pai
+bindsym $mod+a focus parent
+
+# Definição dos Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Troca de workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Mover janela focada para o workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ===============================
+#        SAIR / RELOAD
+# ===============================
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Deseja realmente sair do Sway?' -B 'Sim, sair' 'swaymsg exit'
+bindsym $mod+Shift+Escape exec swaymsg exit
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+c reload
+
+# Redimensionar janelas
+bindsym $mod+Control+Up resize grow height 5 px or 10 ppt
+bindsym $mod+Control+Down resize shrink height 5 px or 10 ppt
+bindsym $mod+Control+Right resize grow width 5 px or 10 ppt
+bindsym $mod+Control+Left resize shrink width 5 px or 10 ppt
+
+# ===============================
+#       LAYOUT DO TECLADO
+# ===============================
+input type:keyboard {
+    xkb_layout "br,us"
+    xkb_options "lv3:ralt_switch,compose:rctrl"
+}
+
+# ===============================
+#       TOUCHPAD (NOTEBOOK)
+# ===============================
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# ===============================
+#       BARRA DE STATUS (WAYBAR)
+# ===============================
+bar {
+    swaybar_command waybar
+}
+
+# ===============================
+#       GAPS (ESTÉTICA)
+# ===============================
+gaps inner 6
+gaps outer 3
+
+# ===============================
+#      DIFERENCIAÇÃO DE JANELAS
+# ===============================
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable

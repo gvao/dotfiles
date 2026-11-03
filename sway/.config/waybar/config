@@ -1,0 +1,65 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": [
+        "pulseaudio",
+        "cpu",
+        "memory",
+        "disk",
+        "battery",
+        "network",
+        "tray",
+        "clock"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "clock": {
+        "format": " {:%H:%M  %d/%m}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": true
+    },
+    "memory": {
+        "format": " {}%"
+    },
+    "disk": {
+        "format": " {percentage_used}%",
+        "path": "/"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈀 Conectado",
+        "format-disconnected": "󰖪 Desconectado",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 Mudo",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "tray": {
+        "spacing": 10
+    }
+}

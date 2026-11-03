@@ -118,8 +118,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # ===============================
 #        SAIR / RELOAD
 # ===============================
-bindsym $mod+Shift+q exec swaynag -t warning -m 'Deseja realmente sair do Sway?' -B 'Sim, sair' 'swaymsg exit'
-bindsym $mod+Shift+Escape exec swaymsg exit
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Deseja realmente sair do Sway?' -B 'Sim, sair' 'killall -q waybar mako; swaymsg exit'
+bindsym $mod+Shift+Escape exec killall -q waybar mako; swaymsg exit
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+c reload
 

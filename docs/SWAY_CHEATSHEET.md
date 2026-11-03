@@ -190,3 +190,15 @@ Programas que iniciam automaticamente com o Sway:
 | [`waybar/style.css`](file:///home/gvao/.dotfiles/sway/.config/waybar/style.css) | Tema visual da Waybar (cores, fontes, bordas). |
 | [`mako/config`](file:///home/gvao/.dotfiles/sway/.config/mako/config) | Configuração do daemon de notificações Mako. |
 | [`wofi/style.css`](file:///home/gvao/.dotfiles/sway/.config/wofi/style.css) | Tema visual do launcher Wofi. |
+| [`scripts/configurar_servicos_wayland.sh`](file:///home/gvao/.dotfiles/scripts/configurar_servicos_wayland.sh) | Script para mascarar autostart do Waybar/Mako fora do Sway. |
+
+---
+
+## 14. Dica: Convivência com COSMIC Desktop / GNOME
+
+Se você alterna entre o Sway e outros ambientes Wayland como o **COSMIC Desktop**, o systemd pode tentar carregar o Waybar no boot desses outros ambientes. Para evitar que o Waybar e o Mako transbordem para o COSMIC, basta executar:
+
+```bash
+bash ~/.dotfiles/scripts/configurar_servicos_wayland.sh
+```
+*(Para reverter caso necessário: `bash ~/.dotfiles/scripts/configurar_servicos_wayland.sh --reverter`)*

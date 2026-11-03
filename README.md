@@ -17,7 +17,7 @@ Cada diretório na raiz é um **módulo independente** que espelha a estrutura d
 | `sway/` | Window manager Sway (Wayland) com Waybar, Mako e Wofi. | `~/.config/sway/`, `~/.config/waybar/`, `~/.config/mako/`, `~/.config/wofi/` |
 | `tmux/` | Tmux com TPM, Catppuccin, vim-tmux-navigator e resurrect. | `~/.tmux.conf`, `~/.tmux/` |
 | `zsh/` | Zsh com configuração modular (aliases, FZF, prompt, syntax highlighting). | `~/.zshrc`, `~/.zsh/` |
-| `scripts/` | Scripts utilitários avulsos (ex: otimização de VRAM/swap). | `~/scripts/` |
+| `scripts/` | Scripts utilitários avulsos (otimização de VRAM/swap, isolamento de daemons Wayland). | `~/scripts/` |
 
 ---
 
@@ -127,10 +127,12 @@ stow zsh alacritty nvim tmux sway
 │       ├── prompt.sh
 │       └── syntax-highlighting.sh
 ├── scripts/            # Utilitários
-│   └── otimizar_vram_swap.sh
-└── docs/               # Documentação
-    ├── TMUX_CHEATSHEET.md
-    └── SWAY_CHEATSHEET.md
+│   ├── otimizar_vram_swap.sh
+│   └── configurar_servicos_wayland.sh
+├── docs/               # Documentação
+│   ├── NVIM_CHEATSHEET.md
+│   ├── SWAY_CHEATSHEET.md
+│   └── TMUX_CHEATSHEET.md
 ```
 
 ---
@@ -141,8 +143,9 @@ Guias de referência rápida com todos os atalhos e configurações documentados
 
 | Documento | Descrição |
 | :--- | :--- |
-| [TMUX_CHEATSHEET.md](docs/TMUX_CHEATSHEET.md) | Atalhos, plugins, copy-mode, sessões e visual do Tmux. |
+| [NVIM_CHEATSHEET.md](docs/NVIM_CHEATSHEET.md) | Atalhos, LSP, autocompletar (blink.cmp), plugins e opções do Neovim. |
 | [SWAY_CHEATSHEET.md](docs/SWAY_CHEATSHEET.md) | Keybindings, workspaces, Waybar, Wofi e daemons do Sway. |
+| [TMUX_CHEATSHEET.md](docs/TMUX_CHEATSHEET.md) | Atalhos, plugins, copy-mode, sessões e visual do Tmux. |
 
 ---
 

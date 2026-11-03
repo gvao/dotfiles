@@ -27,8 +27,8 @@ columns = 200
 lines = 40
 
 [window.padding]
-x = 12
-y = 12
+x = 8
+y = 0
 
 # ------------------------------------------------------------------------------
 # Tipografia & Legibilidade
@@ -116,6 +116,6 @@ bindings = [
 # Inicialização Automática do Tmux (Opcional)
 # Quando quiser iniciar o Alacritty já anexado a uma sessão do tmux, basta descomentar:
 # ------------------------------------------------------------------------------
-# [shell]
-# program = "/usr/bin/tmux"
-# args = ["new-session", "-A", "-s", "main"]
+[shell]
+program = "/usr/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]

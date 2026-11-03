@@ -1,0 +1,9 @@
+# Tmux plugins managed by TPM
+tmux/.tmux/
+.tmux/
+
+# Neovim / editor swap and backup files
+*.swp
+*.swo
+*~
+.DS_Store

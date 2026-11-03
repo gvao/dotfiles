@@ -1,0 +1,26 @@
+# ==============================================================================
+# GNU Readline Configuration (.inputrc)
+# Modo Vi com cursor inteligente e tempo de resposta instantâneo ao ESC
+# ==============================================================================
+
+# Ativa o modo de edição Vi por padrão
+set editing-mode vi
+set keymap vi
+
+# Habilita a exibição do modo para acionar a mudança de formato do cursor
+set show-mode-in-prompt on
+
+# Formato do cursor:
+# Barra vertical (Beam) piscante no modo de inserção (Insert)
+set vi-ins-mode-string \1\e[5 q\2
+
+# Bloco (Block) piscante no modo normal de comandos (Normal / Esc)
+set vi-cmd-mode-string \1\e[1 q\2
+
+# Reduz o atraso ao pressionar ESC de 500ms para 15ms (transição instantânea)
+set keyseq-timeout 15
+
+# Melhorias gerais de usabilidade
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set mark-symlinked-directories on

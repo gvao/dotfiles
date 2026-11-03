@@ -1,22 +1,121 @@
+# ==============================================================================
+# Alacritty Configuration
+# Otimizado para máxima produtividade, conforto visual e baixo consumo de recursos
+# ==============================================================================
+
+# Recarrega automaticamente as configurações ao salvar o arquivo
 live_config_reload = true
 
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+# Tema de cores: Catppuccin Mocha
+import = [
+    "~/.config/alacritty/catppuccin-mocha.toml"
+]
 
 [env]
 TERM = "xterm-256color"
 
+# ------------------------------------------------------------------------------
+# Janela & Renderização
+# ------------------------------------------------------------------------------
 [window]
 decorations = "buttonless"
-dynamic_padding = false
-opacity = 1
+dynamic_padding = true
+opacity = 1.0  # 1.0 = Opaco (zero overhead na GPU/compositor e máximo contraste)
 
 [window.dimensions]
 columns = 200
 lines = 40
 
 [window.padding]
-x = 10
-y = 10
+x = 12
+y = 12
 
+# ------------------------------------------------------------------------------
+# Tipografia & Legibilidade
+# ------------------------------------------------------------------------------
 [font]
-size = 14
+size = 14.0
+
+# Espaçamento vertical extra (y = 2) para maior descanso visual na leitura de código
+offset = { x = 0, y = 0 }
+
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+
+builtin_box_drawing = true
+
+# ------------------------------------------------------------------------------
+# Histórico & Rolagem
+# ------------------------------------------------------------------------------
+[scrolling]
+history = 10000
+multiplier = 3
+
+# ------------------------------------------------------------------------------
+# Cursor
+# ------------------------------------------------------------------------------
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 500
+blink_timeout = 0
+unfocused_hollow = true  # Fica oco quando a janela perde o foco
+
+# ------------------------------------------------------------------------------
+# Mouse
+# ------------------------------------------------------------------------------
+[mouse]
+hide_when_typing = false  # Mantém o ponteiro visível conforme preferência
+
+# ------------------------------------------------------------------------------
+# Suporte a Área de Transferência & OSC 52
+# ------------------------------------------------------------------------------
+[terminal]
+osc52 = "OnlyCopy"
+
+# ------------------------------------------------------------------------------
+# Detecção e Abertura de URLs / Hiperlinks
+# ------------------------------------------------------------------------------
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse = { enabled = true }
+binding = { key = "U", mods = "Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+# ------------------------------------------------------------------------------
+# Atalhos de Teclado (Produtividade)
+# ------------------------------------------------------------------------------
+[keyboard]
+bindings = [
+    # Vi Mode: navegue pelo histórico com hjkl e copie texto sem tirar as mãos do teclado
+    { key = "Space",  mods = "Control|Shift", action = "ToggleViMode" },
+
+    # Busca no buffer do terminal
+    { key = "F",      mods = "Control|Shift", action = "SearchForward" },
+    { key = "B",      mods = "Control|Shift", action = "SearchBackward" },
+
+    # Copiar e Colar padrão
+    { key = "C",      mods = "Control|Shift", action = "Copy" },
+    { key = "V",      mods = "Control|Shift", action = "Paste" },
+
+    # Controle de Zoom da fonte
+    { key = "Plus",   mods = "Control",       action = "IncreaseFontSize" },
+    { key = "Equals", mods = "Control",       action = "IncreaseFontSize" },
+    { key = "Minus",  mods = "Control",       action = "DecreaseFontSize" },
+    { key = "Key0",   mods = "Control",       action = "ResetFontSize" }
+]
+
+# ------------------------------------------------------------------------------
+# Inicialização Automática do Tmux (Opcional)
+# Quando quiser iniciar o Alacritty já anexado a uma sessão do tmux, basta descomentar:
+# ------------------------------------------------------------------------------
+# [shell]
+# program = "/usr/bin/tmux"
+# args = ["new-session", "-A", "-s", "main"]

@@ -160,3 +160,58 @@ source "$OSH"/oh-my-bash.sh
 # Added by Antigravity CLI installer
 export PATH="/home/gvao/.local/bin:$PATH"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# Modo Vi por padrão na linha de comando
+set -o vi
+
+# Editor padrão do sistema
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# ==============================================================================
+# Integração Vi Mode ↔ Clipboard do Sistema
+# Permite copiar/colar entre o terminal e qualquer aplicação (navegador, etc.)
+# Detecta automaticamente Wayland (wl-copy/wl-paste) ou X11 (xclip)
+# ==============================================================================
+if command -v wl-copy &>/dev/null; then
+    __clip_copy() { wl-copy; }
+    __clip_paste() { wl-paste --no-newline 2>/dev/null; }
+elif command -v xclip &>/dev/null; then
+    __clip_copy() { xclip -selection clipboard; }
+    __clip_paste() { xclip -selection clipboard -o 2>/dev/null; }
+fi
+
+# y no modo comando Vi → yanka a linha inteira e copia para o clipboard do sistema
+__vi_yank_to_clipboard() {
+    echo -n "$READLINE_LINE" | __clip_copy
+}
+
+# p no modo comando Vi → cola do clipboard do sistema após o cursor
+__vi_paste_from_clipboard() {
+    local clip
+    clip="$(__clip_paste)"
+    if [[ -n "$clip" ]]; then
+        local before="${READLINE_LINE:0:$READLINE_POINT+1}"
+        local after="${READLINE_LINE:$READLINE_POINT+1}"
+        READLINE_LINE="${before}${clip}${after}"
+        READLINE_POINT=$(( ${#before} + ${#clip} - 1 ))
+    fi
+}
+
+# P no modo comando Vi → cola do clipboard do sistema antes do cursor
+__vi_Paste_from_clipboard() {
+    local clip
+    clip="$(__clip_paste)"
+    if [[ -n "$clip" ]]; then
+        local before="${READLINE_LINE:0:$READLINE_POINT}"
+        local after="${READLINE_LINE:$READLINE_POINT}"
+        READLINE_LINE="${before}${clip}${after}"
+        READLINE_POINT=$(( ${#before} + ${#clip} - 1 ))
+    fi
+}
+
+# Vincula as funções aos atalhos no modo de comando Vi
+bind -m vi-command -x '"y": __vi_yank_to_clipboard'
+bind -m vi-command -x '"p": __vi_paste_from_clipboard'
+bind -m vi-command -x '"P": __vi_Paste_from_clipboard'
+

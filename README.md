@@ -10,12 +10,12 @@ Cada diretório na raiz é um **módulo independente** que espelha a estrutura d
 
 | Módulo | Descrição | Destino dos Symlinks |
 | :--- | :--- | :--- |
-| `alacritty/` | Terminal GPU-accelerated com tema Catppuccin (Mocha & Latte). | `~/.config/alacritty/` |
+| `alacritty/` | Terminal GPU-accelerated com Catppuccin e inicialização automática de nova sessão Tmux. | `~/.config/alacritty/` |
 | `bash/` | Configuração do Bash com Oh My Bash, `.bashrc` e `.inputrc`. | `~/` |
 | `i3/` | Window manager i3 (X11) com i3status e Picom (compositor). | `~/.config/i3/`, `~/.config/i3status/`, `~/.config/picom/` |
 | `nvim/` | Neovim com Lazy.nvim, LSP, autocompletion e tema Catppuccin. | `~/.config/nvim/` |
 | `sway/` | Window manager Sway (Wayland) com Waybar, Mako e Wofi. | `~/.config/sway/`, `~/.config/waybar/`, `~/.config/mako/`, `~/.config/wofi/` |
-| `tmux/` | Tmux com TPM, Catppuccin, vim-tmux-navigator e resurrect. | `~/.tmux.conf`, `~/.tmux/` |
+| `tmux/` | Tmux com TPM, Catppuccin e resurrect. | `~/.tmux.conf`, `~/.tmux/` |
 | `zsh/` | Zsh com configuração modular (aliases, FZF, prompt, syntax highlighting). | `~/.zshrc`, `~/.zsh/` |
 | `scripts/` | Scripts utilitários avulsos (otimização de VRAM/swap, isolamento de daemons Wayland). | `~/scripts/` |
 

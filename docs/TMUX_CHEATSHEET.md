@@ -18,6 +18,7 @@
 * **Portabilidade Git**:
   - Bootstrap automático do **TPM**: ao clonar seus dotfiles em um computador novo, o tmux baixa o TPM e instala todos os plugins sozinho na primeira execução.
   - `tmux/.tmux/` ignorado no `.gitignore` para não versionar plugins de terceiros.
+* **Integração com Alacritty**: O terminal Alacritty está configurado para iniciar automaticamente uma sessão nova e independente do Tmux (`tmux new-session`) a cada janela aberta.
 
 ---
 
@@ -42,16 +43,19 @@
 
 ---
 
-## 4. Navegação Transparente com Neovim (`vim-tmux-navigator`)
+## 4. Navegação & Redimensionamento de Painéis
 
-Com o plugin ativo, você transita de forma fluida entre splits do Neovim e painéis do Tmux usando as mesmas teclas, **sem precisar apertar o prefixo**:
+### Navegação de Foco
 
-| Atalho Direto *(sem prefixo)* | Ação |
+| Atalho com Prefixo | Ação |
 | :--- | :--- |
-| `Ctrl + Shift + h` | Foca o painel ou split da **esquerda**. |
-| `Ctrl + Shift + j` | Foca o painel ou split de **baixo**. |
-| `Ctrl + Shift + k` | Foca o painel ou split de **cima**. |
-| `Ctrl + Shift + l` | Foca o painel ou split da **direita**. |
+| `Ctrl+a` seguido de `←` / `↓` / `↑` / `→` | Foca o painel na direção indicada (setas direcionais). |
+| `Ctrl+a` seguido de `o` | Alterna o foco para o **próximo painel**. |
+| `Ctrl+a` seguido de `;` | Alterna com o **último painel ativo**. |
+| `Ctrl+a` seguido de `q` | Exibe os números dos painéis na tela (digite o número para focar). |
+
+> [!NOTE]
+> Os atalhos diretos sem prefixo com `Ctrl+h/j/k/l` foram explicitamente desvinculados (`unbind -n`) para evitar conflitos com o shell, Neovim e atalhos de terminal. O atalho `Ctrl+l` funciona nativamente para limpar a tela (`clear`) no terminal, e a navegação entre painéis é realizada via prefixo (`Ctrl+a` seguido de setas) ou diretamente pelo mouse.
 
 ### Redimensionamento de Painéis (Estilo Vi)
 
@@ -62,7 +66,7 @@ Com o plugin ativo, você transita de forma fluida entre splits do Neovim e pain
 | `Ctrl+a` seguido de `K` *(Shift+k)* | Expande o painel 5 passos para **cima**. |
 | `Ctrl+a` seguido de `L` *(Shift+l)* | Expande o painel 5 passos para a **direita**. |
 
-*(Você também pode arrastar as linhas divisórias usando o mouse).*
+*(Você também pode redimensionar ou focar painéis arrastando as linhas divisórias ou clicando com o mouse).*
 
 ---
 
@@ -101,6 +105,9 @@ O modo de cópia usa as teclas clássicas do Vim e sincroniza direto com a área
 
 ## 7. Gerenciamento de Sessões
 
+> [!TIP]
+> Ao abrir uma nova janela do terminal Alacritty, o Tmux inicia automaticamente uma **nova sessão isolada**. Se você quiser alternar ou anexar a uma sessão já existente, use `Ctrl+a` seguido de `s` para listar e trocar de sessão interativamente.
+
 ### Atalhos no Tmux:
 | Atalho | Ação |
 | :--- | :--- |
@@ -135,7 +142,6 @@ tmux kill-session -t meu-projeto
 | `tmux-plugins/tpm` | Gerenciador oficial de plugins do Tmux. |
 | `tmux-plugins/tmux-sensible` | Configurações padrão universais e seguras. |
 | `catppuccin/tmux#v2.1.2` | Tema estético moderno Mocha com pílulas arredondadas. |
-| `christoomey/vim-tmux-navigator` | Navegação fluida entre nvim e tmux (`Ctrl+h/j/k/l`). |
 | `tmux-plugins/tmux-yank` | Cópia integrada ao clipboard do sistema operacional. |
 | `tmux-plugins/tmux-resurrect` | Salva o estado (`Ctrl+a` + `Ctrl+s`) e restaura (`Ctrl+a` + `Ctrl+r`). |
 | `tmux-plugins/tmux-continuum` | Salva e restaura as sessões automaticamente a cada 15 min. |

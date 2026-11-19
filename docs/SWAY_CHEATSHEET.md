@@ -7,7 +7,7 @@
 ## 1. Destaques da Configuração & Visual
 
 * **Compositor Wayland**: Sway — tiling window manager compatível com i3, 100% nativo Wayland.
-* **Terminal Padrão**: Alacritty (`$mod+Return`).
+* **Terminal Padrão**: Alacritty (`$mod+Return`) — inicia automaticamente uma nova sessão do Tmux a cada janela.
 * **Navegador Padrão**: Firefox (`$mod+e`).
 * **Barra de Status (Waybar)**: Posicionada no topo com módulos de sistema:
   - Workspaces e modo ativo (esquerda)

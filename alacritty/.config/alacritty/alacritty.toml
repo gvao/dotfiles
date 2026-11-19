@@ -113,9 +113,9 @@ bindings = [
 ]
 
 # ------------------------------------------------------------------------------
-# Inicialização Automática do Tmux (Opcional)
-# Quando quiser iniciar o Alacritty já anexado a uma sessão do tmux, basta descomentar:
+# Inicialização Automática do Tmux
+# Abre sempre uma nova sessão do Tmux a cada nova janela do terminal
 # ------------------------------------------------------------------------------
 [shell]
 program = "/usr/bin/tmux"
-args = ["new-session", "-A", "-s", "main"]
+args = ["new-session"]
